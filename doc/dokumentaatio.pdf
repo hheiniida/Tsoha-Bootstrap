@@ -1,0 +1,5 @@
+Valitsin aiheekseni Muistilistan. Järjestelmän tarkoitus on tehdä lista muistettavista asioista. 
+Käyttäjä haluaa lisätä asioita listaan, prioirisoida, ja luokitella niitä. Käyttäjä haluaa myös kavereidensa voivan käyttää järjestelmää.
+Tavoitteena on saada toimiva muistilista, jossa voi lisätä, poistaa ja muokata tehtäviä. Muita toimintoja ovat kirjautuminen, 
+luokkien lisäys ja poisto, sekä ne voivat olla sisäkkäisiä ja yhdellä askareella voi olla monta luokkaa. Tavoitteena on saada mahdollisimman monta näistä toiminnoista toteutettua.
+Toteutan järjestelmän phpllä. En ole vielä tutustunut missä työympäristössä järjestelmä olisi paras suorittaa.
