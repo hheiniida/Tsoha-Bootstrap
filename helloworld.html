@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muistilista</h1>
+  
+  
+
+  <h3>Lisää uusi muistettava</h3>
+  <input type="text" placeholder="ID">
+<input type="text" placeholder="Tehtävän nimi">
+<input type="text" placeholder="Luokka">
+<input type="text" placeholder="Prioriteetti">
+<input type="text" placeholder="Kuvaus">
+<input type="text" placeholder="Deadline">
+<button>Lisää</button>
+
+  <h3>TO DO</h3>
+ 
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Prioriteetti</th>
+        <th>Muistettava</th>
+        <th>Luokka</th>
+        <th>Kuvaus</th>
+        <th>Deadline</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Imuroi</td>
+        <td>Tavallinen</td>
+        <td>Imuroi olohuone ja keittiö</td>
+        <td>12.6.2016</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Osta uudet tuolit</td>
+        <td>Erikoinen</td>
+        <td>Osta keittiöön tuolit, 5kpl</td>
+        <td>14.12.2016</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
