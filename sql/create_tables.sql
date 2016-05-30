@@ -7,7 +7,7 @@ CREATE TABLE Henkilo(
 
 CREATE TABLE Muistettava(
   id SERIAL PRIMARY KEY,
-  muistettava_id INTEGER REFERENCES Henkilo(id), -- Viiteavain Henkilo-tauluun
+  henkilo_id INTEGER REFERENCES Henkilo(id), -- Viiteavain Henkilo-tauluun
  luokka_id INTEGER REFERENCES Luokka(id),
  nimi varchar(50) NOT NULL,
   prioriteetti varchar(2),
