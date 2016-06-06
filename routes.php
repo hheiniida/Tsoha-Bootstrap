@@ -1,7 +1,7 @@
 <?php
 
 $routes->get('/', function() {
-    HelloWorldController::index();
+    MuistettavaController::index();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -13,4 +13,10 @@ $routes->get('/login.html', function() {
 });
 $routes->get('/edit.html', function() {
     HelloWorldController::edit();
+});
+$routes->post('/muista', function() {
+    MuistettavaController::store();
+});
+$routes->get('/muistettava/:id', function() {
+    MuistettavaController::store();
 });
