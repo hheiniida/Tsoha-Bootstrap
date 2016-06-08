@@ -8,9 +8,25 @@
 
 class Muistettavat extends BaseModel {
 
+    public $id, $henkilo_id, $luokka_id, $nimi, $prioriteetti,
+            $kuvaus, $pvm;
+
+    public function _construct($muista) {
+        $this->id = $muista['id'];
+        $this->henkilo_id = $muista['henkilo_id'];
+        $this->luokka_id = $muista['luokka_id'];
+        $this->nimi = $muista['nimi'];
+        $this->prioriteetti = $muista['prioriteetti'];
+        $this->kuvaus = $muista['kuvaus'];
+        $this->pvm = $muista['pvm'];
+    }
+//    public function __construct($attributes) {
+//        parent::__construct($attributes);
+//    }
+
     public static function all() {
         // Alustetaan kysely tietokantayhteydellämme
-        $query = DB::connection()->prepare('SELECT * FROM Muistettavat');
+        $query = DB::connection()->prepare('SELECT * FROM Muistettava');
         // Suoritetaan kysely
         $query->execute();
         // Haetaan kyselyn tuottamat rivit
@@ -34,9 +50,9 @@ class Muistettavat extends BaseModel {
         return $muistettava;
     }
 
-    public static function save() {
+    public function save() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
-        $query = DB::connection()->prepare('INSERT INTO Muistettavat (nimi, prioriteetti, kuvaus, pvm) VALUES (:nimi, :prioriteetti, :kuvaus, :pvm) RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Muistettava (nimi, prioriteetti, kuvaus, pvm) VALUES (:nimi, :prioriteetti, :kuvaus, :pvm) RETURNING id');
         // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
         $query->execute(array('nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kuvaus' => $this->kuvaus, 'pvm' => $this->pvm));
         // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon

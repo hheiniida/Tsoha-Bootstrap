@@ -4,14 +4,14 @@ $routes->get('/', function() {
     MuistettavaController::index();
 });
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+$routes->get('/todo', function() {
+    MuistettavaController::todo();
 });
 
-$routes->get('/login.html', function() {
+$routes->get('/login', function() {
     HelloWorldController::login();
 });
-$routes->get('/edit.html', function() {
+$routes->get('/edit', function() {
     HelloWorldController::edit();
 });
 $routes->post('/muista', function() {
