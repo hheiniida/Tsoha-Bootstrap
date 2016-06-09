@@ -4,6 +4,11 @@ CREATE TABLE Henkilo(
   nimi varchar(50) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
   salasana varchar(50) NOT NULL
 );
+CREATE TABLE Luokka(
+id SERIAL PRIMARY KEY,
+nimi varchar(15) NOT NULL,
+kuvaus varchar(50)
+);
 
 CREATE TABLE Muistettava(
   id SERIAL PRIMARY KEY,
@@ -15,8 +20,3 @@ CREATE TABLE Muistettava(
   pvm DATE
 );
 
-CREATE TABLE Luokka(
-id SERIAL PRIMARY KEY,
-nimi varchar(15) NOT NULL,
-kuvaus varchar(50)
-);
