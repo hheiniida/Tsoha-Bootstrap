@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Muistilista</h1>
+
+<p>{{message}}</p>
+<form method="POST" action="{{base_path}}/muista">
+    <h3>Lisää uusi muistettava</h3>
+    <input type="text" name="id" placeholder="ID">
+    <input type="text" name="nimi" placeholder="Tehtävän nimi">
+    <input type="text" name="luokka" placeholder="Luokka">
+    <input type="text" name="prioriteetti" placeholder="Prioriteetti">
+    <input type="text" name="kuvaus" placeholder="Kuvaus">
+    <input type="text" name="pvm" placeholder="Deadline">
+    <button type="submit">Lisää</button>
+</form>
+<h3>TO DO</h3>
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Prioriteetti</th>
+            <th>Muistettava</th>
+            <th>Luokka</th>
+            <th>Kuvaus</th>
+            <th>Deadline</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Imuroi</td>
+            <td>Tavallinen</td>
+            <td>Imuroi olohuone ja keittiö</td>
+            <td>12.6.2016</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Osta uudet tuolit</td>
+            <td>Erikoinen</td>
+            <td>Osta keittiöön tuolit, 5kpl</td>
+            <td>14.12.2016</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endblock %}

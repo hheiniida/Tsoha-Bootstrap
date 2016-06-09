@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Muistilista</h1>
+
+<h3>Muokkaa</h3>
+<input type="text" placeholder="ID">
+<input type="text" placeholder="Tehtävän nimi">
+<input type="text" placeholder="Luokka">
+<input type="text" placeholder="Prioriteetti">
+<input type="text" placeholder="Kuvaus">
+<input type="text" placeholder="Deadline">
+<button>Muuta</button>
+<form method="post" action="{{base_path}}/edit" style="display: inline-block;">
+    <button>Poista</button>
+</form>
+{% endblock %}
