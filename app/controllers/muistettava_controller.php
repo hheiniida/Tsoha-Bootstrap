@@ -23,25 +23,21 @@ class MuistettavaController extends BaseController {
     // Pelin muokkaaminen (lomakkeen käsittely)
     public static function update($id) {
         $params = $_POST;
-
         $attributes = array(
             'nimi' => $params['nimi'],
             'prioriteetti' => $params['prioriteetti'],
             'kuvaus' => $params['kuvaus'],
             'pvm' => $params['pvm']
         );
-
         // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
         $muistettava = new Muistettavat($attributes);
         $errors = $muistettava->errors();
-
         if (count($errors) > 0) {
-            View::make('game/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('/edit', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $muistettava->update();
-
-            Redirect::to('/edit' . $muistettava->id, array('message' => 'Peliä on muokattu onnistuneesti!'));
+            Redirect::to('/edit' . $muistettava->id, array('message' => 'Muistettavaa on muokattu onnistuneesti!'));
         }
     }
 
@@ -51,16 +47,13 @@ class MuistettavaController extends BaseController {
         $muistettava = new Muistettavat(array('id' => $id));
         // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
         $muistettava->destroy();
-
         // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
         Redirect::to('/edit', array('message' => 'Peli on poistettu onnistuneesti!'));
     }
 
     public static function store() {
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
-
         $params = $_POST;
-
         Kint::dump($params);
         //die();
         // Alustetaan uusi Muistettva-luokan olion käyttäjän syöttämillä arvoilla
