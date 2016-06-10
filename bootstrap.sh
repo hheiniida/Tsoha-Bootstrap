@@ -36,3 +36,4 @@ php composer.phar install
 exit"
 
 echo "Valmis! Sovelluksesi on nyt valmiina osoitteessa $USERNAME.users.cs.helsinki.fi/$PROJECT_FOLDER"
+Status API Training Shop Blog About
