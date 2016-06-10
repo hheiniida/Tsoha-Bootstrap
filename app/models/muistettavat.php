@@ -7,10 +7,8 @@
  */
 
 class Muistettavat extends BaseModel {
-
     public $id, $henkilo_id, $luokka_id, $nimi, $prioriteetti,
             $kuvaus, $pvm;
-
     public function _construct($muista) {
         $this->id = $muista['id'];
         $this->henkilo_id = $muista['henkilo_id'];
@@ -23,7 +21,6 @@ class Muistettavat extends BaseModel {
 //    public function __construct($attributes) {
 //        parent::__construct($attributes);
 //    }
-
     public static function all() {
         // Alustetaan kysely tietokantayhteydellämme
         $query = DB::connection()->prepare('SELECT * FROM Muistettava');
@@ -32,7 +29,6 @@ class Muistettavat extends BaseModel {
         // Haetaan kyselyn tuottamat rivit
         $rows = $query->fetchAll();
         $muistettava = array();
-
         // Käydään kyselyn tuottamat rivit läpi
         foreach ($rows as $row) {
             // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
@@ -45,12 +41,9 @@ class Muistettavat extends BaseModel {
                 'kuvaus' => $row['kuvaus'],
                 'pvm' => $row['pvm']
             ));
-           
         }
-
         return $muistettava;
     }
-
     public function save() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
         $query = DB::connection()->prepare('INSERT INTO Muistettava (nimi, prioriteetti, kuvaus, pvm) VALUES (:nimi, :prioriteetti, :kuvaus, :pvm) RETURNING id');
@@ -61,13 +54,10 @@ class Muistettavat extends BaseModel {
         // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
         $this->id = $row['id'];
     }
-
     public static function find($id) {
-
         $query = DB::connection()->prepare('SELECT * FROM Muistettava WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
         if ($row) {
             $muistettava = new Muistettavat(array(
                 'id' => $row['id'],
@@ -78,11 +68,8 @@ class Muistettavat extends BaseModel {
                 'kuvaus' => $row['kuvaus'],
                 'pvm' => $row['pvmpublisher']
             ));
-
             return $muistettava;
         }
-
         return null;
     }
-
 }
