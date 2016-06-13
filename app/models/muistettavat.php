@@ -1,26 +1,13 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+ 
 class Muistettavat extends BaseModel {
     public $id, $henkilo_id, $luokka_id, $nimi, $prioriteetti,
             $kuvaus, $pvm;
-    public function __construct($muista) {
-        $this->id = $muista['id'];
-        $this->henkilo_id = $muista['henkilo_id'];
-        $this->luokka_id = $muista['luokka_id'];
-        $this->nimi = $muista['nimi'];
-        $this->prioriteetti = $muista['prioriteetti'];
-        $this->kuvaus = $muista['kuvaus'];
-        $this->pvm = $muista['pvm'];
+ 
+    public function __construct($attributes) {
+        parent::__construct($attributes);
     }
-//    public function __construct($attributes) {
-//        parent::__construct($attributes);
-//    }
+ 
     public static function all() {
         // Alustetaan kysely tietokantayhteydellämme
         $query = DB::connection()->prepare('SELECT * FROM Muistettava');
@@ -28,11 +15,11 @@ class Muistettavat extends BaseModel {
         $query->execute();
         // Haetaan kyselyn tuottamat rivit
         $rows = $query->fetchAll();
-        $muistettava = array();
+        $items = array();
         // Käydään kyselyn tuottamat rivit läpi
         foreach ($rows as $row) {
             // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
-            $muistettava[] = new Muistettavat(array(
+            $items[] = new Muistettavat(array(
                 'id' => $row['id'],
                 'henkilo_id' => $row['henkilo_id'],
                 'luokka_id' => $row['luokka_id'],
@@ -42,7 +29,7 @@ class Muistettavat extends BaseModel {
                 'pvm' => $row['pvm']
             ));
         }
-        return $muistettava;
+        return $items;
     }
     public function save() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
@@ -58,8 +45,9 @@ class Muistettavat extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Muistettava WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
+ 
         if ($row) {
-            $muistettava = new Muistettavat(array(
+            return new Muistettavat(array(
                 'id' => $row['id'],
                 'henkilo_id' => $row['henkilo_id'],
                 'luokka_id' => $row['luokka_id'],
@@ -68,8 +56,8 @@ class Muistettavat extends BaseModel {
                 'kuvaus' => $row['kuvaus'],
                 'pvm' => $row['pvmpublisher']
             ));
-            return $muistettava;
         }
+ 
         return null;
     }
 }
