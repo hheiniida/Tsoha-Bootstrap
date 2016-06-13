@@ -1,5 +1,5 @@
 <?php
-
+require '/app/models/muistettavat.php';
 class MuistettavaController extends BaseController {
 
     public static function index() {
