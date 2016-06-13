@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Muistilista</h1>
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.name}} Muistilista</h1>
+
+{% else %}
+<p> Kirjaudu sisään! </p>
+<h1> Muistilista </h1>
+
+{% endif %}
 
 <p>{{message}}</p>
 <form method="POST" action="{{base_path}}/muista">
