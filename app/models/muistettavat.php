@@ -9,7 +9,7 @@
 class Muistettavat extends BaseModel {
     public $id, $henkilo_id, $luokka_id, $nimi, $prioriteetti,
             $kuvaus, $pvm;
-    public function _construct($muista) {
+    public function __construct($muista) {
         $this->id = $muista['id'];
         $this->henkilo_id = $muista['henkilo_id'];
         $this->luokka_id = $muista['luokka_id'];
