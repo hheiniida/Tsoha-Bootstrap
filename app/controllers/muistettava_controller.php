@@ -1,6 +1,5 @@
 <?php
 
-
 class MuistettavaController extends BaseController {
 
     public static function index() {
@@ -13,17 +12,20 @@ class MuistettavaController extends BaseController {
     public static function todo() {
         // Testaa koodiasi täällä
         //echo 'Hello World!';
-        View::make('index.html');
+        $muistettava = Muistettavat::all();
+        View::make('index.html', array('muistettava' => $muistettava));
     }
 
     public static function edit($id) {
         $muistettava = Muistettavat::find($id);
-        View::make('edit', array('attributes' => $muistettava));
+        View::make('edit.html', array('attributes' => $muistettava));
     }
 
     // Pelin muokkaaminen (lomakkeen käsittely)
-    public static function update($id) {
+    public function update($id) {
         $params = $_POST;
+        Kint::dump($params);
+        
         $attributes = array(
             'nimi' => $params['nimi'],
             'prioriteetti' => $params['prioriteetti'],
@@ -32,14 +34,14 @@ class MuistettavaController extends BaseController {
         );
         // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
         $muistettava = new Muistettavat($attributes);
-        $errors = $muistettava->errors();
-        if (count($errors) > 0) {
-            View::make('/edit', array('errors' => $errors, 'attributes' => $attributes));
-        } else {
+        //$errors = $muistettava->errors();
+        //if (count($errors) > 0) {
+            //View::make('/edit', array('errors' => $errors, 'attributes' => $attributes));
+        //} else {
             // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
-            $muistettava->update();
+            $muistettava->update($id);
             Redirect::to('/edit' . $muistettava->id, array('message' => 'Muistettavaa on muokattu onnistuneesti!'));
-        }
+        //}
     }
 
     // Pelin poistaminen
@@ -47,9 +49,9 @@ class MuistettavaController extends BaseController {
         // Alustetaan Game-olio annetulla id:llä
         $muistettava = new Muistettavat(array('id' => $id));
         // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
-        $muistettava->destroy();
+        $muistettava->delete($id);
         // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
-        Redirect::to('/edit', array('message' => 'Peli on poistettu onnistuneesti!'));
+        Redirect::to('/todo', array('message' => 'Peli on poistettu onnistuneesti!'));
     }
 
     public static function store() {
@@ -65,7 +67,7 @@ class MuistettavaController extends BaseController {
             'pvm' => $params['pvm']
         ));
         if ($params['nimi'] != '' && strlen($params['nimi']) >= 3) {
-            $nimi->save();
+            $muistettava->save();
             Redirect::to('/todo', array('message' => 'Muistettava on lisätty kirjastoosi!'));
             // ...
         } else {
