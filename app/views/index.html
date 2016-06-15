@@ -35,7 +35,19 @@
         </tr>
     </thead>
     <tbody>
+        {% for muistettavat in muistettava %}
         <tr>
+            <td>{{muistettavat.prioriteetti}}</td>
+            <td>{{muistettavat.nimi}}</td>
+            <td>{{muistettavat.luokka}}</td>
+            <td>{{muistettavat.kuvaus}}</td>
+            <td>{{muistettavat.pvm}}</td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/edit/{{muistettavat.id}}">Muokkaa</a></td>
+
+
+        </tr>
+        {% endfor %}
+        <!--<tr>
             <td>1</td>
             <td>Imuroi</td>
             <td>Tavallinen</td>
@@ -49,7 +61,7 @@
             <td>Osta keittiöön tuolit, 5kpl</td>
             <td>14.12.2016</td>
         </tr>
-
+        -->
     </tbody>
 </table>
 {% endblock %}

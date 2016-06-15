@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+<p>{{message}}</p>
 <h1>Muistilista</h1>
 
 <h3>Muokkaa</h3>
-<input type="text" placeholder="ID">
-<input type="text" placeholder="Tehtävän nimi">
-<input type="text" placeholder="Luokka">
-<input type="text" placeholder="Prioriteetti">
-<input type="text" placeholder="Kuvaus">
-<input type="text" placeholder="Deadline">
-<button>Muuta</button>
-<form method="post" action="{{base_path}}/edit" style="display: inline-block;">
+<form method="post" action="{{base_path}}/edit/{{attributes.id}}" style="display: inline-block;">
+    <input type="text" name="id" value="{{attributes.id}}" placeholder="ID">
+    <input type="text" name="nimi" value="{{attributes.nimi}}" placeholder="Tehtävän nimi">
+    <input type="text" name="luokka" value="{{attributes.luokka}}" placeholder="Luokka">
+    <input type="text" name="prioriteetti" value="{{attributes.prioriteetti}}" placeholder="Prioriteetti">
+    <input type="text" name="kuvaus" value="{{attributes.kuvaus}}" placeholder="Kuvaus">
+    <input type="text" name="pvm" value="{{attributes.pvm}}" placeholder="Deadline">
+
+    <button>Muuta</button>
+</form>
+<form method="post" action="{{base_path}}/destroy/{{attributes.id}}" style="display: inline-block;">
     <button>Poista</button>
 </form>
 {% endblock %}
