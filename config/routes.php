@@ -3,9 +3,11 @@
 $routes->get('/', function() {
     MuistettavaController::index();
 });
+
 $routes->get('/todo', function() {
     MuistettavaController::todo();
 });
+
 $routes->get('/login', function() {
     HelloWorldController::login();
 });
@@ -18,16 +20,17 @@ $routes->post('/muista', function() {
 $routes->get('/muistettava/:id', function() {
     MuistettavaController::store();
 });
-$routes->get('/edit', function($id) {
+$routes->get('/edit/:id', function($id) {
     // Pelin muokkauslomakkeen esittäminen
     MuistettavaController::edit($id);
 });
-$routes->post('/edit', function($id) {
-
+$routes->post('/edit/:id', function($id) {
+    // Pelin muokkaaminen
     MuistettavaController::update($id);
 });
-$routes->post('/edit', function($id) {
 
+$routes->post('/destroy/:id', function($id) {
+    // Pelin poisto
     MuistettavaController::destroy($id);
 });
 
