@@ -4,6 +4,7 @@ class MuistettavaController extends BaseController {
 
     public static function index() {
         // Haetaan kaikki pelit tietokannasta
+
         $muistettava = Muistettavat::all();
         // Renderöidään views/game kansiossa sijaitseva tiedosto index.html muuttujan $games datalla
         View::make('home.html', array('muistettava' => $muistettava));
@@ -12,20 +13,24 @@ class MuistettavaController extends BaseController {
     public static function todo() {
         // Testaa koodiasi täällä
         //echo 'Hello World!';
+        self::check_logged_in();
         $muistettava = Muistettavat::all();
         View::make('index.html', array('muistettava' => $muistettava));
     }
 
     public static function edit($id) {
+
+        self::check_logged_in();
         $muistettava = Muistettavat::find($id);
         View::make('edit.html', array('attributes' => $muistettava));
     }
 
     // Pelin muokkaaminen (lomakkeen käsittely)
     public function update($id) {
+        self::check_logged_in();
         $params = $_POST;
         Kint::dump($params);
-        
+
         $attributes = array(
             'nimi' => $params['nimi'],
             'prioriteetti' => $params['prioriteetti'],
@@ -36,16 +41,17 @@ class MuistettavaController extends BaseController {
         $muistettava = new Muistettavat($attributes);
         //$errors = $muistettava->errors();
         //if (count($errors) > 0) {
-            //View::make('/edit', array('errors' => $errors, 'attributes' => $attributes));
+        //View::make('/edit', array('errors' => $errors, 'attributes' => $attributes));
         //} else {
-            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
-            $muistettava->update($id);
-            Redirect::to('/edit' . $muistettava->id, array('message' => 'Muistettavaa on muokattu onnistuneesti!'));
+        // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
+        $muistettava->update($id);
+        Redirect::to('/edit' . $muistettava->id, array('message' => 'Muistettavaa on muokattu onnistuneesti!'));
         //}
     }
 
     // Pelin poistaminen
     public static function destroy($id) {
+        self::check_logged_in();
         // Alustetaan Game-olio annetulla id:llä
         $muistettava = new Muistettavat(array('id' => $id));
         // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
@@ -55,6 +61,7 @@ class MuistettavaController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         Kint::dump($params);
