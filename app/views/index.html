@@ -1,13 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-{% if user_logged_in %}
+
 <h1>Käyttäjän {{user_logged_in.name}} Muistilista</h1>
-
-{% else %}
-<p> Kirjaudu sisään! </p>
-<h1> Muistilista </h1>
-
-{% endif %}
 
 <p>{{message}}</p>
 <form method="POST" action="{{base_path}}/muista">
@@ -47,21 +41,7 @@
 
         </tr>
         {% endfor %}
-        <!--<tr>
-            <td>1</td>
-            <td>Imuroi</td>
-            <td>Tavallinen</td>
-            <td>Imuroi olohuone ja keittiö</td>
-            <td>12.6.2016</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Osta uudet tuolit</td>
-            <td>Erikoinen</td>
-            <td>Osta keittiöön tuolit, 5kpl</td>
-            <td>14.12.2016</td>
-        </tr>
-        -->
+
     </tbody>
 </table>
 {% endblock %}
