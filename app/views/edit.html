@@ -7,7 +7,11 @@
 <form method="post" action="{{base_path}}/edit/{{attributes.id}}" style="display: inline-block;">
     <input type="text" name="id" value="{{attributes.id}}" placeholder="ID">
     <input type="text" name="nimi" value="{{attributes.nimi}}" placeholder="Tehtävän nimi">
-    <input type="text" name="luokka" value="{{attributes.luokka}}" placeholder="Luokka">
+    <select name="luokka_id">
+        {% for luokka in luokat %}
+        <option value="{{luokka.id}}">{{luokka.nimi}}</option>
+        {% endfor %}
+    </select>
     <input type="text" name="prioriteetti" value="{{attributes.prioriteetti}}" placeholder="Prioriteetti">
     <input type="text" name="kuvaus" value="{{attributes.kuvaus}}" placeholder="Kuvaus">
     <input type="text" name="pvm" value="{{attributes.pvm}}" placeholder="Deadline">

@@ -8,7 +8,11 @@
     <h3>Lisää uusi muistettava</h3>
     <input type="text" name="id" placeholder="ID">
     <input type="text" name="nimi" placeholder="Tehtävän nimi">
-    <input type="text" name="luokka" placeholder="Luokka">
+    <select name="luokka_id">
+        {% for luokka in luokat %}
+        <option value="{{luokka.id}}">{{luokka.nimi}}</option>
+        {% endfor %}
+    </select>
     <input type="text" name="prioriteetti" placeholder="Prioriteetti">
     <input type="text" name="kuvaus" placeholder="Kuvaus">
     <input type="text" name="pvm" placeholder="Deadline">
@@ -25,6 +29,7 @@
             <th>Luokka</th>
             <th>Kuvaus</th>
             <th>Deadline</th>
+            <th></th>
 
         </tr>
     </thead>
@@ -33,7 +38,7 @@
         <tr>
             <td>{{muistettavat.prioriteetti}}</td>
             <td>{{muistettavat.nimi}}</td>
-            <td>{{muistettavat.luokka}}</td>
+            <td>{{muistettavat.luokka_nimi}}</td>
             <td>{{muistettavat.kuvaus}}</td>
             <td>{{muistettavat.pvm}}</td>
             <td><a class="btn btn-default btn-sm" href="{{base_path}}/edit/{{muistettavat.id}}">Muokkaa</a></td>
@@ -42,6 +47,9 @@
         </tr>
         {% endfor %}
 
+
     </tbody>
 </table>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>
+
 {% endblock %}
