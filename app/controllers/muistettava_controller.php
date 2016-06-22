@@ -15,14 +15,22 @@ class MuistettavaController extends BaseController {
         //echo 'Hello World!';
         self::check_logged_in();
         $muistettava = Muistettavat::all();
-        View::make('index.html', array('muistettava' => $muistettava));
+        $luokat = Luokka::all();
+        //Kint::dump($muistettava);
+        //die();
+        foreach ($muistettava as $muistettavat) {
+            $luokka = Luokka::find($muistettavat->luokka_id);
+            $muistettavat->luokka_nimi = $luokka->nimi;
+        }
+        View::make('index.html', array('muistettava' => $muistettava, 'luokat' => $luokat));
     }
 
     public static function edit($id) {
 
         self::check_logged_in();
         $muistettava = Muistettavat::find($id);
-        View::make('edit.html', array('attributes' => $muistettava));
+        $luokat = Luokka::all();
+        View::make('edit.html', array('attributes' => $muistettava, 'luokat' => $luokat));
     }
 
     // Pelin muokkaaminen (lomakkeen käsittely)
@@ -30,8 +38,9 @@ class MuistettavaController extends BaseController {
         self::check_logged_in();
         $params = $_POST;
         Kint::dump($params);
-
+        //die();
         $attributes = array(
+            'luokka_id' => (Int) $params['luokka_id'],
             'nimi' => $params['nimi'],
             'prioriteetti' => $params['prioriteetti'],
             'kuvaus' => $params['kuvaus'],
@@ -68,6 +77,7 @@ class MuistettavaController extends BaseController {
         //die();
         // Alustetaan uusi Muistettva-luokan olion käyttäjän syöttämillä arvoilla
         $muistettava = new Muistettavat(array(
+            'luokka_id' => $params['luokka_id'],
             'nimi' => $params['nimi'],
             'prioriteetti' => $params['prioriteetti'],
             'kuvaus' => $params['kuvaus'],
